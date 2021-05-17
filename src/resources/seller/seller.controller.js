@@ -15,6 +15,7 @@ export const getSearchResult = async (req, res) => {
             'address.city': req.query.city,
             'address.zip': req.query.zip,
         })
+            .select('-password')
             .lean()
             .exec()
 
