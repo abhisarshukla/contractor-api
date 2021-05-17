@@ -13,6 +13,7 @@ import {
     protectSeller,
 } from './utils/auth'
 import sellerRouter from './resources/seller/seller.router'
+import sellerSearchRouter from './resources/seller/seller.search'
 import customerRouter from './resources/customer/customer.router'
 import {contractRouterCustomer, contractRouterSeller} from './resources/contract/contract.router'
 
@@ -30,6 +31,8 @@ app.post('/signin/c', signinCustomer)
 app.post('/signup/s', signupSeller)
 app.post('/signin/s', signinSeller)
 
+app.use('/api', sellerSearchRouter)
+
 app.use('/api/c', protectCustomer)
 app.use('/api/s', protectSeller)
 
@@ -37,19 +40,6 @@ app.use('/api/c/user', customerRouter)
 app.use('/api/s/user', sellerRouter)
 app.use('/api/c/contract', contractRouterCustomer)
 app.use('/api/s/contract', contractRouterSeller)
-
-
-app.get('/', (req, res) => {
-    res.send({
-        message: 'Hello Insomnia',
-        params: [req.query.a, req.query.b, req.query.c],
-    })
-})
-
-app.post('/', (req, res) => {
-    console.log('Received', req.body)
-    res.send({ message: 'OK' })
-})
 
 export const start = async () => {
     try {
