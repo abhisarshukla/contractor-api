@@ -6,10 +6,14 @@ export const me = (req, res) => {
 
 export const getSearchResult = async (req, res) => {
     try {
+        console.log(req.query.service, req.query.city, req.query.zip)
+        if (!req.query.service) req.query.service = /.*/i
+        if (!req.query.city) req.query.city = /.*/i
+        if (!req.query.zip) req.query.zip = /.*/i
         const sellers = await Seller.find({
             service: req.query.service,
-            city: req.query.city,
-            zip: req.query.zip,
+            'address.city': req.query.city,
+            'address.zip': req.query.zip,
         })
             .lean()
             .exec()

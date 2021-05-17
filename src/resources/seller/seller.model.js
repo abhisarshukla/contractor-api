@@ -73,7 +73,7 @@ sellerSchema.pre('save', function (next) {
     })
 })
 
-sellerSchema.methods.checkPasssword = function (password) {
+sellerSchema.methods.checkPassword = function (password) {
     const passwordHash = this.password
     return new Promise((resolve, reject) => {
         bcrypt.compare(password, passwordHash, (err, same) => {
@@ -86,6 +86,6 @@ sellerSchema.methods.checkPasssword = function (password) {
     })
 }
 
-sellerSchema.index({ service: 1, city: 1, zip: 1 })
+sellerSchema.index({ service: 1, "address.city": 1, "address.zip": 1 })
 
 export const Seller = mongoose.model('seller', sellerSchema)
