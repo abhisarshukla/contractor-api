@@ -40,11 +40,23 @@ export const getOne = async (req, res) => {
     }
 }
 
+export const getAll = async (req, res) => {
+    try {
+        const sellers = await Seller.find().select('-password').lean().exec()
+
+        res.status(200).json({ data: sellers })
+    } catch (e) {
+        console.error(e)
+        res.status(400).end()
+    }
+}
+
 export const updateMe = async (req, res) => {
     try {
         const seller = await Seller.findByIdAndUpdate(req.user._id, req.body, {
             new: true,
         })
+            .select('-password')
             .lean()
             .exec()
 
