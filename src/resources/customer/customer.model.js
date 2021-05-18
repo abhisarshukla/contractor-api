@@ -51,7 +51,7 @@ customerSchema.pre('save', function (next) {
     })
 })
 
-customerSchema.methods.checkPasssword = function (password) {
+customerSchema.methods.checkPassword = function (password) {
     const passwordHash = this.password
     return new Promise((resolve, reject) => {
         bcrypt.compare(password, passwordHash, (err, same) => {
