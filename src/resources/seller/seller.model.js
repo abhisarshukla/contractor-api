@@ -34,6 +34,7 @@ const sellerSchema = new mongoose.Schema({
     rate: {
         type: Number,
         required: true,
+        default: 500
     },
     unit: {
         type: String,
