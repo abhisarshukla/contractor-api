@@ -28,7 +28,10 @@ export const getSearchResult = async (req, res) => {
 
 export const getOne = async (req, res) => {
     try {
-        const seller = await Seller.findById(req.params.id).lean().exec()
+        const seller = await Seller.findById(req.params.id)
+            .select('-password')
+            .lean()
+            .exec()
 
         res.status(200).json({ data: seller })
     } catch (e) {
